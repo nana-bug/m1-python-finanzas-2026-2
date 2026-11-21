@@ -1,0 +1,8 @@
+{
+  "sesion": 2,
+  "checkpoint": 0,
+  "datos_pendientes": [
+    "ipc.csv",
+    "walmex.csv"
+  ]
+}

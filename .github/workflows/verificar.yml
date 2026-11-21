@@ -1,0 +1,29 @@
+# Revisión automática del repo de alumnos: se corre en cada actualización.
+# Este repositorio se genera desde el repo docente; no se edita a mano.
+name: Verificar publicación
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: No debe haber marcas de solución
+        run: |
+          if grep -rIlE "INICIO[ ]+SOLUCI|FIN[ ]+SOLUCI" --exclude-dir=.git --exclude-dir=.github . ; then
+            echo "Se encontraron marcas de solución en los archivos de arriba."
+            exit 1
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pruebas de las funciones liberadas
+        run: |
+          pip install -q -r requirements.txt pytest
+          if ls tests/test_*.py >/dev/null 2>&1; then python -m pytest tests -q; else echo "Aún no hay pruebas liberadas."; fi

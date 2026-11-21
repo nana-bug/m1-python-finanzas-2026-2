@@ -1,0 +1,9 @@
+# Librerías del Módulo 1. Colab ya trae casi todas; la celda estándar instala la que falta.
+numpy>=1.26
+pandas>=2.2
+scipy>=1.11
+matplotlib>=3.8
+statsmodels>=0.14
+numpy-financial>=1.0
+yfinance>=0.2.50
+requests>=2.31
